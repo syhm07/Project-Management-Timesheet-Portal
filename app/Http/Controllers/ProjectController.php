@@ -179,6 +179,17 @@ class ProjectController extends Controller
         }
     }*/
 
+    public function exportPDF(Request $request) {
+         $constraints = [
+            'from' => $request['from'],
+            'to' => $request['to']
+        ];
+        $projects = $this->getExportingData($constraints);
+        $pdf = PDF::loadView('project/pdf', ['projects' => $projects, 'searchingVals' => $constraints]);
+        return $pdf->download('report_from_'. $request['from'].'_to_'.$request['to'].'pdf');
+        // return view('system-mgmt/report/pdf', ['employees' => $employees, 'searchingVals' => $constraints]);
+    }
+
     private function validateInput($request) {
         $this->validate($request, [
             'category_id' => 'required',
@@ -201,5 +212,20 @@ class ProjectController extends Controller
         }
 
         return $queryInput;
+    }
+
+    private function getExportingData($constraints) {
+        return DB::table('projects')
+        ->leftJoin('category', 'projects.category_id', '=', 'category.id')
+        ->leftJoin('codes', 'projects.codes_id', '=', 'codes.id')
+        ->leftJoin('country', 'projects.country_id', '=', 'country.id')
+        ->select('projects.*', 'codes.id as codes_id', 'codes.project_code as p_code', 'category.type as category_type',  'category.id as category_id','country.id as country_id', 'country.name as country_name')
+        ->where('start', '>=', $constraints['from'])
+        ->where('end', '<=', $constraints['to'])
+        ->get()
+        ->map(function ($item, $key) {
+        return (array) $item;
+        })
+        ->all();
     }
 }

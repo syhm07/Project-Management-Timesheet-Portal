@@ -67,7 +67,7 @@
                          <button type="submit" class="btn btn-danger col-sm-3 col-xs-5 btn-margin">
                           Delete
                         </button>
-                    </form>
+            </form>
                   </td>
               </tr>
             @endforeach

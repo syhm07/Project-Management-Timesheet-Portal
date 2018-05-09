@@ -58,3 +58,4 @@ Route::post('code/search', 'CodeController@search')->name('code.search');
 
 Route::resource('project', 'ProjectController');
 Route::post('project/search', 'ProjectController@search')->name('project.search');
+Route::post('project/pdf', 'ProjectController@exportPDF')->name('project.pdf');

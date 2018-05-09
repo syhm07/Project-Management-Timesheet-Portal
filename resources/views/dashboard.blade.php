@@ -78,9 +78,55 @@ desired effect
 
       <!-- Your Page Content Here -->
 
+        <div class="row">
+
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <?php $projects = DB::table('projects'); ?>
+                        <h3>{{ $projects->count() }}</h3><p>Listed Projects</p>
+                    </div>
+                    <div class="icon"><i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="{{ url('project') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <?php $codes = DB::table('codes'); ?>
+                        <h3>{{ $codes->count() }}</h3><p>Project Codes</p>
+                    </div>
+                    <div class="icon"><ion-icon name="code"></ion-icon><></i>
+                    </div>
+                    <a href="{{ url('code') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <a href="{{ url('category') }}"><span class="info-box-icon bg-teal-gradient"><i class="fa fa-files-o"></i></span></a>
+                    <div class="info-box-content">
+                        <?php $categories = DB::table('category'); ?>
+                        <span class="info-box-text">Categories</span>
+                        <span class="info-box-number">{{ $categories->count() }}</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div><!-- /.col -->
+
+
+  </div>
+  <div class="row"></div>
     </section>
     <!-- /.content -->
-  </div>
+
+  
   <!-- /.content-wrapper -->
 
   <!-- Footer -->
